@@ -508,6 +508,363 @@ footer{background:var(--bg0);border-top:1px solid rgba(232,184,48,.1);padding:48
   <button onclick="tutupFoto()" style="position:absolute;top:20px;right:20px;background:rgba(232,184,48,.2);border:1px solid rgba(232,184,48,.3);color:var(--gold3);width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;">&#x2715;</button>
 </div>
 
+<!-- PATUNGAN PUPUK SUBSIDI -->
+<div class="gold-line"></div>
+<section class="sec" id="pupuk" style="background:linear-gradient(180deg,#0a0800,#060500);">
+  <div class="sec-inner">
+    <div class="reveal" style="text-align:center;">
+      <span class="eyebrow">&#10022; Peluang Patungan</span>
+      <h2 class="sec-h">Tebus Pupuk Subsidi<br><em>Untung Bersama</em></h2>
+      <p class="sec-p" style="margin:0 auto;">Modal kecil, untung tunai, tanpa tunggu panen. Pupuk ditebus kolektif oleh Poktan Sadar dan dana kembali dalam hitungan hari.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:36px;" class="reveal">
+      <div style="background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:18px;padding:22px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold3);">Rp 100rb</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-top:6px;">Modal / Sak</div>
+      </div>
+      <div style="background:rgba(90,158,74,.05);border:1px solid rgba(90,158,74,.2);border-radius:18px;padding:22px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:#5a9e4a;">Rp 10rb</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-top:6px;">Profit / Sak</div>
+      </div>
+      <div style="background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:18px;padding:22px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:var(--gold3);">Min. 2</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-top:6px;">Sak Minimum</div>
+      </div>
+      <div style="background:rgba(74,122,176,.05);border:1px solid rgba(74,122,176,.2);border-radius:18px;padding:22px 14px;text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;color:#4a7ab0;">Cepat</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-top:6px;">Dana Kembali</div>
+      </div>
+    </div>
+    <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.15);border-radius:24px;padding:28px;margin-top:24px;" class="reveal">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--gold2);margin-bottom:18px;">&#10022; Kalkulator Patungan</div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px;">
+        <span style="font-size:13px;color:var(--dim);">Jumlah Sak:</span>
+        <button onclick="kurangSak()" style="width:32px;height:32px;border-radius:50%;background:rgba(232,184,48,.1);border:1px solid var(--border);color:var(--gold3);font-size:18px;cursor:pointer;font-family:sans-serif;">-</button>
+        <span id="jumlahSak" style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;color:var(--gold3);min-width:50px;text-align:center;">2</span>
+        <button onclick="tambahSak()" style="width:32px;height:32px;border-radius:50%;background:rgba(232,184,48,.1);border:1px solid var(--border);color:var(--gold3);font-size:18px;cursor:pointer;font-family:sans-serif;">+</button>
+        <span style="font-size:12px;color:var(--ghost);">sak</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:20px;">
+        <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:10px;color:var(--ghost);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Modal</div>
+          <div id="pupukModal" style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold3);">Rp 200rb</div>
+        </div>
+        <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:10px;color:var(--ghost);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Profit</div>
+          <div id="pupukProfit" style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#5a9e4a;">Rp 20rb</div>
+        </div>
+        <div style="background:rgba(0,0,0,.3);border-radius:12px;padding:14px;text-align:center;">
+          <div style="font-size:10px;color:var(--ghost);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Total Kembali</div>
+          <div id="pupukTotal" style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#4a7ab0;">Rp 220rb</div>
+        </div>
+      </div>
+      <div style="background:rgba(232,184,48,.04);border-radius:12px;padding:14px;font-size:12px;color:var(--ghost);line-height:1.8;margin-bottom:20px;">
+        Dana masuk ke kas Poktan Sadar, digunakan untuk tebus pupuk subsidi kolektif, pupuk disalurkan ke petani anggota, profit Rp 10.000/sak dikembalikan ke pendana setelah distribusi selesai.
+      </div>
+      <a id="pupukWA" href="https://wa.me/6283871666136?text=Assalamualaikum%20Kang%20Malvie%2C%20saya%20ingin%20patungan%20tebus%20pupuk%202%20sak" target="_blank" class="btn-gold" style="display:flex;justify-content:center;text-decoration:none;">Daftar Patungan via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- DAFTAR ANGGOTA -->
+<div class="gold-line"></div>
+<section class="sec" id="daftarAnggota" style="background:linear-gradient(180deg,#060500,#020300);">
+  <div class="sec-inner">
+    <div class="reveal" style="text-align:center;">
+      <span class="eyebrow">&#10022; Bergabung</span>
+      <h2 class="sec-h">Daftar Anggota<br><em>Poktan Sadar</em></h2>
+      <p class="sec-p" style="margin:0 auto;">Terbuka untuk petani dan warga Desa Gunungguruh yang ingin bersama menjaga lahan, meningkatkan hasil pertanian, dan melestarikan hutan Gunung Guruh.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin-top:36px;" class="reveal">
+      <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.1);border-radius:16px;padding:20px;">
+        <div style="font-size:26px;margin-bottom:10px;">&#127807;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">Akses Bibit</div>
+        <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Bibit tanaman produktif dari nursery Poktan Sadar dengan harga anggota.</div>
+      </div>
+      <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.1);border-radius:16px;padding:20px;">
+        <div style="font-size:26px;margin-bottom:10px;">&#127806;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">Pupuk Subsidi</div>
+        <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Akses pupuk bersubsidi melalui tebus kolektif Poktan Sadar.</div>
+      </div>
+      <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.1);border-radius:16px;padding:20px;">
+        <div style="font-size:26px;margin-bottom:10px;">&#129309;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">Gotong Royong</div>
+        <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Jaringan petani saling bantu dalam pengolahan dan pemasaran hasil panen.</div>
+      </div>
+      <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.1);border-radius:16px;padding:20px;">
+        <div style="font-size:26px;margin-bottom:10px;">&#128203;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px;">SK Resmi</div>
+        <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Terdaftar resmi SK Kepala Desa No. 141.1/18/XI/2021.</div>
+      </div>
+    </div>
+    <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.15);border-radius:24px;padding:32px;margin-top:28px;" class="reveal">
+      <div style="font-size:13px;font-weight:700;color:var(--dim);margin-bottom:18px;">Formulir Pendaftaran Anggota</div>
+      <div id="formAnggota">
+        <div class="field"><label>Nama Lengkap</label><input id="aNama" placeholder="Nama lengkap Anda" class="form-input"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="field"><label>No. WhatsApp</label><input id="aWA" placeholder="08xxxxxxxxxx" type="tel" class="form-input"></div>
+          <div class="field"><label>Usia</label><input id="aUsia" placeholder="Contoh: 35" type="number" class="form-input"></div>
+        </div>
+        <div class="field"><label>Alamat / RT RW</label><input id="aAlamat" placeholder="Alamat di Desa Gunungguruh" class="form-input"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="field">
+            <label>Luas Lahan</label>
+            <select id="aLahan" class="form-input" style="background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);">
+              <option value="">Pilih luas lahan</option>
+              <option>Kurang dari 500 m2</option>
+              <option>500 m2 - 1.000 m2</option>
+              <option>1.000 m2 - 5.000 m2</option>
+              <option>Lebih dari 5.000 m2</option>
+              <option>Belum punya lahan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Komoditas Utama</label>
+            <select id="aKomoditas" class="form-input" style="background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);">
+              <option value="">Pilih komoditas</option>
+              <option>Padi</option>
+              <option>Labu Siam</option>
+              <option>Kopi</option>
+              <option>Sayuran</option>
+              <option>Tanaman Keras</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Motivasi Bergabung</label><input id="aMotivasi" placeholder="Ceritakan motivasi Anda bergabung..." class="form-input"></div>
+        <button class="submit-btn" onclick="submitAnggota()">Kirim Pendaftaran Anggota</button>
+      </div>
+      <div id="anggotaSuccess" style="display:none;text-align:center;padding:24px;background:rgba(232,184,48,.05);border:1px solid rgba(232,184,48,.15);border-radius:14px;margin-top:12px;">
+        <div style="font-size:40px;margin-bottom:10px;">&#127807;</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold3);margin-bottom:8px;">Ahlan Wasahlan!</div>
+        <p style="font-size:12px;color:var(--ghost);line-height:1.8;">Pendaftaran diterima. Kang Malvie akan menghubungi Anda dalam 1x24 jam untuk proses verifikasi keanggotaan.</p>
+        <a id="anggotaWA" href="#" target="_blank" style="display:inline-block;margin-top:14px;padding:10px 24px;background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#000;border-radius:50px;font-weight:800;font-size:13px;text-decoration:none;">Chat WhatsApp Sekarang</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KAS POKTAN TRANSPARAN -->
+<div class="gold-line"></div>
+<section class="sec" id="kasPoktan" style="background:linear-gradient(180deg,#020300,#000);">
+  <div class="sec-inner">
+    <div class="reveal" style="text-align:center;">
+      <span class="eyebrow">&#10022; Transparansi Keuangan</span>
+      <h2 class="sec-h">Kas Poktan Sadar<br><em>Terbuka & Amanah</em></h2>
+      <p class="sec-p" style="margin:0 auto;">Setiap rupiah yang masuk dan keluar dicatat dan dipublikasikan. Ini bukan hanya soal angka — ini soal kepercayaan.</p>
+    </div>
+
+    <!-- RINGKASAN KAS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:36px;" class="reveal">
+      <div style="background:rgba(90,158,74,.05);border:1px solid rgba(90,158,74,.2);border-radius:18px;padding:22px;text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-bottom:8px;">Total Pemasukan</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#5a9e4a;" id="kasIn">Rp 0</div>
+      </div>
+      <div style="background:rgba(176,74,74,.05);border:1px solid rgba(176,74,74,.2);border-radius:18px;padding:22px;text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-bottom:8px;">Total Pengeluaran</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:#b04a4a;" id="kasOut">Rp 0</div>
+      </div>
+      <div style="background:rgba(232,184,48,.05);border:1px solid rgba(232,184,48,.2);border-radius:18px;padding:22px;text-align:center;">
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-bottom:8px;">Saldo Kas</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;color:var(--gold3);" id="kasSaldo">Rp 0</div>
+      </div>
+    </div>
+
+    <!-- TABEL TRANSAKSI -->
+    <div style="background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.12);border-radius:20px;overflow:hidden;margin-top:24px;" class="reveal">
+      <div style="padding:18px 22px;border-bottom:1px solid rgba(232,184,48,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+        <div style="font-size:12px;font-weight:700;color:var(--dim);">Laporan Transaksi Terbaru</div>
+        <div style="font-size:10px;color:var(--ghost);">Diperbarui oleh Admin Poktan Sadar</div>
+      </div>
+      <div id="kasTransaksi">
+        <!-- Data transaksi diisi admin -->
+        <div style="padding:40px;text-align:center;color:var(--ghost);font-size:13px;font-style:italic;">
+          Belum ada transaksi tercatat. Admin akan memperbarui secara berkala.
+        </div>
+      </div>
+    </div>
+
+    <!-- TOMBOL ADMIN KAS (tersembunyi) -->
+    <div style="text-align:center;margin-top:20px;">
+      <button onclick="toggleKasAdmin()" style="background:transparent;border:none;color:rgba(106,90,48,.2);font-size:10px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:1px;">&#9881;</button>
+    </div>
+
+    <!-- FORM INPUT KAS (Admin Only) -->
+    <div id="kasAdminPanel" style="display:none;background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.15);border-radius:20px;padding:24px;margin-top:16px;">
+      <div style="font-size:12px;font-weight:700;color:var(--gold2);margin-bottom:16px;">Input Transaksi Baru</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="field">
+          <label>Jenis</label>
+          <select id="kJenis" class="form-input" style="background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);">
+            <option value="masuk">Pemasukan</option>
+            <option value="keluar">Pengeluaran</option>
+          </select>
+        </div>
+        <div class="field"><label>Nominal (Rp)</label><input id="kNominal" type="number" placeholder="Contoh: 500000" class="form-input"></div>
+      </div>
+      <div class="field"><label>Keterangan</label><input id="kKeterangan" placeholder="Contoh: Donasi dari Bpk. Ahmad" class="form-input"></div>
+      <button onclick="tambahKas()" style="padding:11px 24px;background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#000;border:none;border-radius:10px;font-weight:700;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;">+ Tambah Transaksi</button>
+    </div>
+  </div>
+</section>
+
+<style>
+.form-input{width:100%;padding:11px 14px;background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);font-size:13px;font-family:"DM Sans",sans-serif;transition:all .2s;}
+.form-input:focus{outline:none;border-color:var(--gold3);}
+.form-input::placeholder{color:rgba(240,228,192,.2);}
+.kas-row{display:flex;justify-content:space-between;align-items:center;padding:12px 22px;border-bottom:1px solid rgba(232,184,48,.06);font-size:12px;}
+.kas-row:last-child{border-bottom:none;}
+.kas-masuk{color:#5a9e4a;font-weight:700;}
+.kas-keluar{color:#b04a4a;font-weight:700;}
+</style>
+
+<!-- FOLLOW & DAPATKAN PELUANG -->
+<div class="gold-line"></div>
+<section class="sec" id="followBTN" style="background:linear-gradient(160deg,#0a0800,#050400,#000);">
+  <div class="sec-inner">
+    <div class="reveal" style="text-align:center;">
+      <span class="eyebrow">&#10022; Ikuti & Dapatkan Peluang</span>
+      <h2 class="sec-h">Follow Semua Channel BTN<br><em>Buka Peluang Modal Pertanian</em></h2>
+      <p class="sec-p" style="margin:0 auto;">Pengikut setia BTN mendapat prioritas pertama untuk peluang bantuan modal pertanian, program adopsi pohon, dan kemitraan langsung dengan Poktan Sadar.</p>
+    </div>
+
+    <!-- LANGKAH -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:40px;" class="reveal">
+
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@baheolataninusantara" target="_blank" style="text-decoration:none;">
+        <div class="follow-card" id="fc-yt">
+          <div class="follow-num">01</div>
+          <div class="follow-icon" style="background:rgba(255,50,50,.1);border-color:rgba(255,50,50,.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ff4444"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          </div>
+          <div class="follow-name">YouTube BTN</div>
+          <div class="follow-handle">@baheolataninusantara</div>
+          <div class="follow-desc">Subscribe & aktifkan notifikasi untuk update kebun dan program terbaru</div>
+          <div class="follow-cta">Subscribe Sekarang &rarr;</div>
+        </div>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/btnofficial165" target="_blank" style="text-decoration:none;">
+        <div class="follow-card" id="fc-ig">
+          <div class="follow-num">02</div>
+          <div class="follow-icon" style="background:rgba(225,48,108,.1);border-color:rgba(225,48,108,.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#e1306c"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8.1-3.3 1.7-4.8 4.9-4.9 1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4A6.2 6.2 0 0012 5.8zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.8 1.4 1.4 0 000-2.8z"/></svg>
+          </div>
+          <div class="follow-name">Instagram BTN</div>
+          <div class="follow-handle">@btnofficial165</div>
+          <div class="follow-desc">Follow & aktifkan story untuk konten harian dari lapangan Pasir Ipis</div>
+          <div class="follow-cta">Follow Sekarang &rarr;</div>
+        </div>
+      </a>
+
+      <!-- TikTok -->
+      <a href="https://www.tiktok.com/@malvieshop" target="_blank" style="text-decoration:none;">
+        <div class="follow-card" id="fc-tt">
+          <div class="follow-num">03</div>
+          <div class="follow-icon" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#ffffff"><path d="M19.6 3.3a4.5 4.5 0 01-2.8-2.3h-3.1v12.9c0 1.4-1.1 2.5-2.5 2.5s-2.5-1.1-2.5-2.5 1.1-2.5 2.5-2.5c.3 0 .5 0 .8.1V8.3c-.3 0-.5-.1-.8-.1C6 8.2 3 11.2 3 14.9s3 6.7 6.7 6.7 6.7-3 6.7-6.7V9.2a7.6 7.6 0 004.6 1.5V7.4a4.6 4.6 0 01-1.4-.1z"/></svg>
+          </div>
+          <div class="follow-name">TikTok BTN</div>
+          <div class="follow-handle">@malvieshop</div>
+          <div class="follow-desc">Follow untuk konten edukasi pertanian dan Madilog yang menginspirasi</div>
+          <div class="follow-cta">Follow Sekarang &rarr;</div>
+        </div>
+      </a>
+
+      <!-- Facebook -->
+      <a href="https://www.facebook.com/baheulataninusantara" target="_blank" style="text-decoration:none;">
+        <div class="follow-card" id="fc-fb">
+          <div class="follow-num">04</div>
+          <div class="follow-icon" style="background:rgba(24,119,242,.1);border-color:rgba(24,119,242,.2);">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.1C24 5.4 18.6 0 12 0S0 5.4 0 12.1C0 18.1 4.4 23.1 10.1 24v-8.4H7.1v-3.5h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9v2.2h3.3l-.5 3.5h-2.8V24C19.6 23.1 24 18.1 24 12.1z"/></svg>
+          </div>
+          <div class="follow-name">Facebook BTN</div>
+          <div class="follow-handle">Baheula Tani Nusantara</div>
+          <div class="follow-desc">Like & follow halaman resmi BTN untuk info program dan kegiatan Poktan</div>
+          <div class="follow-cta">Follow Sekarang &rarr;</div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- HADIAH / BENEFIT -->
+    <div style="margin-top:36px;background:linear-gradient(135deg,rgba(232,184,48,.06),rgba(232,184,48,.02));border:1px solid rgba(232,184,48,.2);border-radius:24px;padding:32px;" class="reveal">
+      <div style="text-align:center;margin-bottom:28px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--gold3);">Yang Anda Dapatkan</div>
+        <div style="font-size:13px;color:var(--ghost);margin-top:6px;">Setelah follow semua channel BTN</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">&#127807;</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;">Prioritas Modal Pertanian</div>
+            <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Follower aktif mendapat prioritas pertama program bantuan modal dari Poktan Sadar.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">&#127806;</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;">Info Pupuk Subsidi Lebih Awal</div>
+            <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Notifikasi pertama saat kuota patungan pupuk subsidi dibuka.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">&#9749;</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;">Diskon Adopsi Pohon</div>
+            <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Follower aktif semua channel mendapat harga spesial adopsi pohon kopi & mangrove.</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold1),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">&#129309;</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;">Jaringan Mitra Petani</div>
+            <div style="font-size:11px;color:var(--ghost);line-height:1.7;">Terhubung langsung dengan komunitas petani dan pendana Poktan Sadar.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA KONFIRMASI -->
+      <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(232,184,48,.1);text-align:center;">
+        <div style="font-size:13px;color:var(--dim);margin-bottom:16px;">Sudah follow semua channel? Konfirmasi ke Kang Malvie dan dapatkan akses prioritas!</div>
+        <a href="https://wa.me/6283871666136?text=Assalamualaikum%20Kang%20Malvie%2C%20saya%20sudah%20follow%20semua%20channel%20BTN%20(YouTube%2C%20Instagram%2C%20TikTok%2C%20Facebook).%20Saya%20ingin%20mendapatkan%20peluang%20bantuan%20modal%20pertanian%20dari%20Poktan%20Sadar." target="_blank" class="btn-gold" style="display:inline-flex;text-decoration:none;">
+          &#128241; Konfirmasi Follow via WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.follow-card{
+  background:rgba(232,184,48,.03);border:1px solid rgba(232,184,48,.1);
+  border-radius:20px;padding:24px;height:100%;
+  transition:all .3s;position:relative;overflow:hidden;
+}
+.follow-card:hover{
+  border-color:rgba(232,184,48,.35);
+  transform:translateY(-4px);
+  box-shadow:0 12px 40px rgba(232,184,48,.1);
+}
+.follow-num{
+  font-family:"Cormorant Garamond",serif;font-size:48px;font-weight:700;
+  color:rgba(232,184,48,.06);position:absolute;top:12px;right:16px;line-height:1;
+}
+.follow-icon{
+  width:56px;height:56px;border-radius:14px;
+  border:1px solid;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.follow-name{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.follow-handle{font-size:11px;color:var(--gold2);font-weight:700;margin-bottom:10px;}
+.follow-desc{font-size:12px;color:var(--ghost);line-height:1.8;margin-bottom:14px;}
+.follow-cta{font-size:12px;font-weight:700;color:var(--gold3);}
+</style>
+
 <footer>
   <div class="ft-name">Poktan Sadar</div>
   <div class="ft-tagline">Kembali ke Akar · Sadar Tani · Sadar Jaga Ngariksa Leweung</div>
@@ -589,6 +946,72 @@ function bukaFoto(el){
 function tutupFoto(){
   document.getElementById('fotoModal').style.display = 'none';
 }
+
+
+// KALKULATOR PUPUK
+var nSak = 2;
+function updatePupuk(){
+  document.getElementById('jumlahSak').textContent = nSak;
+  document.getElementById('pupukModal').textContent = fRpK(nSak * 100000);
+  document.getElementById('pupukProfit').textContent = fRpK(nSak * 10000);
+  document.getElementById('pupukTotal').textContent = fRpK(nSak * 110000);
+  var msg = 'Assalamualaikum Kang Malvie, saya ingin patungan tebus pupuk subsidi ' + nSak + ' sak (Modal: ' + fRpK(nSak*100000) + '). Mohon info lebih lanjut.';
+  document.getElementById('pupukWA').href = 'https://wa.me/6283871666136?text=' + encodeURIComponent(msg);
+}
+function tambahSak(){ if(nSak < 50) nSak++; updatePupuk(); }
+function kurangSak(){ if(nSak > 2) nSak--; updatePupuk(); }
+updatePupuk();
+
+// FORM ANGGOTA
+function submitAnggota(){
+  var nama = document.getElementById('aNama').value.trim();
+  var wa = document.getElementById('aWA').value.trim();
+  var usia = document.getElementById('aUsia').value;
+  var alamat = document.getElementById('aAlamat').value.trim();
+  var lahan = document.getElementById('aLahan').value;
+  var komoditas = document.getElementById('aKomoditas').value;
+  var motivasi = document.getElementById('aMotivasi').value.trim();
+  if(!nama||!wa){alert('Nama dan WhatsApp wajib diisi!');return;}
+  var msg = 'Assalamualaikum Kang Malvie - DAFTAR ANGGOTA POKTAN SADAR - Nama: ' + nama + ' - WA: ' + wa + ' - Usia: ' + usia + ' thn - Alamat: ' + alamat + ' - Lahan: ' + lahan + ' - Komoditas: ' + komoditas + ' - Motivasi: ' + motivasi;
+  document.getElementById('anggotaWA').href = 'https://wa.me/6283871666136?text=' + encodeURIComponent(msg);
+  document.getElementById('formAnggota').style.display = 'none';
+  document.getElementById('anggotaSuccess').style.display = 'block';
+}
+
+// KAS POKTAN
+var kasData = JSON.parse(localStorage.getItem('kasPoktanSadar') || '[]');
+function renderKas(){
+  var totalIn = 0, totalOut = 0;
+  kasData.forEach(function(t){ if(t.jenis==='masuk') totalIn+=t.nominal; else totalOut+=t.nominal; });
+  document.getElementById('kasIn').textContent = fRpK(totalIn);
+  document.getElementById('kasOut').textContent = fRpK(totalOut);
+  document.getElementById('kasSaldo').textContent = fRpK(totalIn - totalOut);
+  var tbody = document.getElementById('kasTransaksi');
+  if(!kasData.length){
+    tbody.innerHTML = '<div style="padding:40px;text-align:center;color:var(--ghost);font-size:13px;font-style:italic;">Belum ada transaksi tercatat.</div>';
+    return;
+  }
+  tbody.innerHTML = kasData.slice().reverse().map(function(t){
+    return '<div class="kas-row"><div><div style="font-weight:600;color:var(--text);">' + t.ket + '</div><div style="font-size:10px;color:var(--ghost);margin-top:2px;">' + t.tgl + '</div></div><div class="kas-' + t.jenis + '">' + (t.jenis==='masuk'?'+':'-') + fRpK(t.nominal) + '</div></div>';
+  }).join('');
+}
+function tambahKas(){
+  var jenis = document.getElementById('kJenis').value;
+  var nominal = parseInt(document.getElementById('kNominal').value)||0;
+  var ket = document.getElementById('kKeterangan').value.trim();
+  if(!nominal||!ket){alert('Nominal dan keterangan wajib diisi!');return;}
+  var now = new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+  kasData.push({jenis:jenis,nominal:nominal,ket:ket,tgl:now});
+  localStorage.setItem('kasPoktanSadar', JSON.stringify(kasData));
+  document.getElementById('kNominal').value='';
+  document.getElementById('kKeterangan').value='';
+  renderKas();
+}
+function toggleKasAdmin(){
+  var p = document.getElementById('kasAdminPanel');
+  p.style.display = p.style.display==='none'?'block':'none';
+}
+renderKas();
 
 function fRpK(n){n=parseInt(n)||0;if(n>=1000000)return 'Rp '+(n/1000000).toFixed(1)+'jt';if(n>=1000)return 'Rp '+(n/1000).toFixed(0)+'rb';return 'Rp '+n;}
 </script>
