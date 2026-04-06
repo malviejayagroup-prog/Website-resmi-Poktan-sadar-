@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RDKK Pupuk Subsidi 2026 — Poktan Sadar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--bg1:#06050a;--bg2:#0d0b00;
+  --gold1:#8a5e08;--gold2:#c9920d;--gold3:#e8b830;--gold4:#f7d96a;
+  --text:#f0e4c0;--dim:#c4a060;--ghost:#6a5a30;
+  --green:#5a9e4a;--red:#c04a4a;
+  --border:rgba(232,184,48,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:"DM Sans",sans-serif;color:var(--text);min-height:100vh;}
+
+/* NAVBAR */
+.navbar{position:sticky;top:0;z-index:99;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.nav-brand{font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:700;color:var(--gold3);}
+.nav-back{padding:7px 16px;border-radius:20px;border:1px solid var(--border);color:var(--dim);font-size:11px;font-weight:700;text-decoration:none;transition:all .2s;}
+.nav-back:hover{border-color:var(--gold3);color:var(--gold3);}
+
+/* HEADER */
+.header{padding:40px 20px 32px;text-align:center;background:linear-gradient(180deg,#000,#0d0b00);}
+.header-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--gold2);margin-bottom:12px;}
+.header-h1{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,6vw,48px);font-weight:700;color:var(--text);line-height:1.1;margin-bottom:8px;}
+.header-h1 em{font-style:italic;color:var(--gold3);}
+.header-sub{font-size:13px;color:var(--ghost);margin-bottom:28px;}
+.header-stats{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
+.hstat{background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:14px;padding:14px 20px;text-align:center;min-width:120px;}
+.hstat-val{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:700;color:var(--gold3);}
+.hstat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--ghost);margin-top:3px;}
+
+/* SEARCH & FILTER */
+.controls{padding:20px;max-width:900px;margin:0 auto;display:flex;gap:10px;flex-wrap:wrap;}
+.search-input{flex:1;min-width:200px;padding:11px 16px;background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);font-size:14px;font-family:"DM Sans",sans-serif;}
+.search-input:focus{outline:none;border-color:var(--gold3);}
+.search-input::placeholder{color:rgba(240,228,192,.25);}
+.filter-btn{padding:10px 18px;border-radius:10px;border:1px solid var(--border);color:var(--dim);font-size:12px;font-weight:700;background:transparent;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;}
+.filter-btn.active{background:rgba(232,184,48,.1);border-color:var(--gold3);color:var(--gold3);}
+
+/* TABLE */
+.table-wrap{max-width:900px;margin:0 auto 40px;padding:0 16px;}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl thead th{background:rgba(232,184,48,.06);border-bottom:1px solid rgba(232,184,48,.15);padding:12px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold2);text-align:center;}
+.tbl thead th:first-child{text-align:left;}
+.tbl tbody tr{border-bottom:1px solid rgba(232,184,48,.05);transition:background .2s;}
+.tbl tbody tr:hover{background:rgba(232,184,48,.03);}
+.tbl tbody td{padding:12px 14px;font-size:13px;vertical-align:middle;}
+.no-col{color:var(--ghost);font-size:11px;width:36px;}
+.nama-col{font-weight:600;color:var(--text);}
+.kuota-col{text-align:center;font-size:12px;color:var(--ghost);}
+.sisa-col{text-align:center;font-family:"Cormorant Garamond",serif;font-size:18px;font-weight:700;}
+.sisa-ok{color:var(--green);}
+.sisa-warn{color:var(--gold3);}
+.sisa-empty{color:var(--red);}
+.pct-bar{height:4px;background:rgba(255,255,255,.06);border-radius:50px;overflow:hidden;margin-top:4px;min-width:60px;}
+.pct-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,var(--green),var(--gold3));transition:width .5s;}
+.ambil-btn{padding:6px 14px;border-radius:8px;background:rgba(232,184,48,.1);border:1px solid rgba(232,184,48,.2);color:var(--gold3);font-size:11px;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;white-space:nowrap;}
+.ambil-btn:hover{background:rgba(232,184,48,.2);}
+.ambil-btn:disabled{opacity:.3;cursor:not-allowed;}
+.empty-row{text-align:center;padding:40px;color:var(--ghost);font-style:italic;font-size:13px;}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:999;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal.show{display:flex;}
+.modal-box{width:min(420px,92vw);background:#0d0b00;border:1px solid rgba(232,184,48,.2);border-radius:20px;padding:28px;}
+.modal-title{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:700;color:var(--gold3);margin-bottom:4px;}
+.modal-sub{font-size:12px;color:var(--ghost);margin-bottom:20px;}
+.modal-field{margin-bottom:14px;}
+.modal-label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--ghost);margin-bottom:6px;}
+.modal-input{width:100%;padding:11px 14px;background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);font-size:14px;font-family:"DM Sans",sans-serif;}
+.modal-input:focus{outline:none;border-color:var(--gold3);}
+.modal-sisa{font-size:12px;color:var(--ghost);margin-top:6px;}
+.modal-btns{display:flex;gap:10px;margin-top:20px;}
+.btn-confirm{flex:1;padding:12px;border-radius:10px;background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#000;border:none;cursor:pointer;font-weight:800;font-size:14px;font-family:"DM Sans",sans-serif;}
+.btn-cancel{padding:12px 20px;border-radius:10px;background:transparent;border:1px solid rgba(232,184,48,.2);color:var(--ghost);cursor:pointer;font-size:13px;font-family:"DM Sans",sans-serif;}
+.modal-info{background:rgba(232,184,48,.04);border-radius:10px;padding:12px;font-size:12px;color:var(--ghost);line-height:1.8;margin-bottom:14px;}
+
+/* ADMIN PANEL */
+.admin-bar{background:rgba(232,184,48,.04);border-top:1px solid rgba(232,184,48,.1);padding:16px 20px;text-align:center;position:sticky;bottom:0;}
+.admin-toggle{background:transparent;border:1px solid rgba(232,184,48,.15);border-radius:20px;padding:8px 20px;color:var(--ghost);font-size:11px;cursor:pointer;font-family:"DM Sans",sans-serif;}
+.admin-panel{max-width:900px;margin:0 auto;padding:20px 16px;display:none;}
+.admin-panel.show{display:block;}
+.admin-pass{display:flex;gap:10px;margin-bottom:16px;}
+.admin-pass input{flex:1;padding:10px 14px;background:rgba(232,184,48,.04);border:1px solid rgba(232,184,48,.15);border-radius:10px;color:var(--text);font-size:13px;font-family:"DM Sans",sans-serif;}
+.admin-pass input:focus{outline:none;border-color:var(--gold3);}
+.admin-pass button{padding:10px 20px;border-radius:10px;background:linear-gradient(135deg,var(--gold1),var(--gold2));color:#000;border:none;cursor:pointer;font-weight:700;font-size:13px;font-family:"DM Sans",sans-serif;}
+.admin-logged{display:none;}
+.admin-logged.show{display:block;}
+.reset-btn{padding:8px 18px;border-radius:8px;background:rgba(192,74,74,.1);border:1px solid rgba(192,74,74,.2);color:#c04a4a;font-size:11px;font-weight:700;cursor:pointer;font-family:"DM Sans",sans-serif;}
+
+/* RIWAYAT */
+.riwayat-wrap{max-width:900px;margin:0 auto;padding:0 16px 40px;}
+.riwayat-title{font-size:12px;font-weight:700;color:var(--dim);margin-bottom:12px;text-transform:uppercase;letter-spacing:1.5px;}
+.riwayat-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(232,184,48,.05);font-size:12px;}
+.riwayat-nama{font-weight:600;color:var(--text);}
+.riwayat-detail{color:var(--ghost);font-size:11px;margin-top:2px;}
+.riwayat-jumlah{font-family:"Cormorant Garamond",serif;font-size:16px;font-weight:700;color:var(--red);}
+
+@media(max-width:600px){
+  .tbl thead th:nth-child(3),.tbl tbody td:nth-child(3){display:none;}
+  .sisa-col{font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-brand">&#127807; RDKK Pupuk 2026 — Poktan Sadar</div>
+  <a href="https://malviejayagroup-prog.github.io/Website-resmi-Poktan-sadar-/" class="nav-back">&#8592; Kembali ke Website</a>
+</nav>
+
+<div class="header">
+  <div class="header-eyebrow">&#10022; Rencana Definitif Kebutuhan Kelompok</div>
+  <h1 class="header-h1">Stok Pupuk Subsidi<br><em>Poktan Sadar 2026</em></h1>
+  <div class="header-sub">Kelompok Tani Sadar · Desa Gunungguruh · Kab. Sukabumi · RT0000001259 - Tani Murni</div>
+  <div class="header-stats">
+    <div class="hstat">
+      <div class="hstat-val" id="totalAnggota">86</div>
+      <div class="hstat-lbl">Total Anggota</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-val" id="sisaUrea">—</div>
+      <div class="hstat-lbl">Sisa Urea (kg)</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-val" id="sisaNPK">—</div>
+      <div class="hstat-lbl">Sisa NPK (kg)</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-val" id="sudahAmbil">0</div>
+      <div class="hstat-lbl">Sudah Ambil</div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <input class="search-input" id="searchInput" placeholder="Cari nama anggota..." oninput="filterTabel()">
+  <button class="filter-btn active" id="fAll" onclick="setFilter('all',this)">Semua</button>
+  <button class="filter-btn" id="fSisa" onclick="setFilter('sisa',this)">Ada Sisa</button>
+  <button class="filter-btn" id="fHabis" onclick="setFilter('habis',this)">Habis</button>
+</div>
+
+<div class="table-wrap">
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="text-align:left;">No</th>
+        <th style="text-align:left;">Nama Anggota</th>
+        <th>Kuota Urea</th>
+        <th>Sisa Urea</th>
+        <th>Kuota NPK</th>
+        <th>Sisa NPK</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="tabelBody"></tbody>
+  </table>
+</div>
+
+<!-- RIWAYAT PENGAMBILAN -->
+<div class="riwayat-wrap" id="riwayatWrap" style="display:none;">
+  <div class="riwayat-title">&#8984; Riwayat Pengambilan Terbaru</div>
+  <div id="riwayatList"></div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-bar">
+  <button class="admin-toggle" onclick="toggleAdmin()">&#9881; Panel Admin</button>
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-pass" id="adminPassForm">
+      <input type="password" id="adminPassInput" placeholder="Password admin...">
+      <button onclick="loginAdmin()">Masuk</button>
+    </div>
+    <div class="admin-logged" id="adminLogged">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+        <span style="font-size:12px;color:var(--green);font-weight:700;">&#10003; Admin Login</span>
+        <button class="reset-btn" onclick="resetSemua()">&#8635; Reset Semua Kuota</button>
+        <button class="reset-btn" onclick="resetRiwayat()" style="background:rgba(232,184,48,.05);border-color:rgba(232,184,48,.2);color:var(--gold2);">Hapus Riwayat</button>
+      </div>
+      <div style="font-size:11px;color:var(--ghost);">Pengurangan kuota dilakukan melalui tombol "Catat Ambil" di setiap baris anggota.</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AMBIL -->
+<div class="modal" id="modalAmbil">
+  <div class="modal-box">
+    <div class="modal-title" id="mNama">Nama Anggota</div>
+    <div class="modal-sub">Catat pengambilan pupuk subsidi</div>
+    <div class="modal-info" id="mInfo">Sisa kuota saat ini: ...</div>
+    <div class="modal-field">
+      <label class="modal-label">Jumlah Urea diambil (kg)</label>
+      <input class="modal-input" id="mUrea" type="number" min="0" placeholder="0">
+      <div class="modal-sisa" id="mSisaUrea"></div>
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Jumlah NPK diambil (kg)</label>
+      <input class="modal-input" id="mNPK" type="number" min="0" placeholder="0">
+      <div class="modal-sisa" id="mSisaNPK"></div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-confirm" onclick="konfirmasiAmbil()">&#10003; Konfirmasi Pengambilan</button>
+      <button class="btn-cancel" onclick="tutupModal()">Batal</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var RDKK_AWAL = [{"no": 1, "nama": "AANG", "urea_kuota": 660, "urea_sisa": 660, "npk_kuota": 600, "npk_sisa": 600}, {"no": 2, "nama": "ADANG", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 3, "nama": "ADE ANWARI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 4, "nama": "ADE JAPAR", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 186, "npk_sisa": 186}, {"no": 5, "nama": "ADE RAHMAT", "urea_kuota": 600, "urea_sisa": 600, "npk_kuota": 600, "npk_sisa": 600}, {"no": 6, "nama": "AEP", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 186, "npk_sisa": 186}, {"no": 7, "nama": "AGUS", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 8, "nama": "ALI", "urea_kuota": 495, "urea_sisa": 495, "npk_kuota": 450, "npk_sisa": 450}, {"no": 9, "nama": "ANUN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 10, "nama": "ANWAR", "urea_kuota": 330, "urea_sisa": 330, "npk_kuota": 300, "npk_sisa": 300}, {"no": 11, "nama": "APUD SARIPUDIN", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 12, "nama": "ASUM SUMARNA", "urea_kuota": 138, "urea_sisa": 138, "npk_kuota": 126, "npk_sisa": 126}, {"no": 13, "nama": "ATENG SULAEMAN", "urea_kuota": 81, "urea_sisa": 81, "npk_kuota": 75, "npk_sisa": 75}, {"no": 14, "nama": "BIBIN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 15, "nama": "CICIH", "urea_kuota": 396, "urea_sisa": 396, "npk_kuota": 360, "npk_sisa": 360}, {"no": 16, "nama": "CUCUP", "urea_kuota": 180, "urea_sisa": 180, "npk_kuota": 165, "npk_sisa": 165}, {"no": 17, "nama": "DADAN", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 18, "nama": "DASEP AHMAD SAEPULOH", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 19, "nama": "DUCE", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 188, "npk_sisa": 188}, {"no": 20, "nama": "DULOH", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 21, "nama": "DULOH", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 22, "nama": "ECE", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 23, "nama": "EMAN", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 24, "nama": "EMAN SULAEMAN", "urea_kuota": 485, "urea_sisa": 485, "npk_kuota": 450, "npk_sisa": 450}, {"no": 25, "nama": "EMAN SULAEMAN", "urea_kuota": 485, "urea_sisa": 485, "npk_kuota": 450, "npk_sisa": 450}, {"no": 26, "nama": "EMPUD", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 27, "nama": "ENDED", "urea_kuota": 825, "urea_sisa": 825, "npk_kuota": 750, "npk_sisa": 750}, {"no": 28, "nama": "ENJUNG NURHASANAH", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 29, "nama": "ERIK ANDRIANA", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 30, "nama": "EROS", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 31, "nama": "HARISMA SUANDA", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 32, "nama": "HINDARSAH", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 33, "nama": "H. MIMIN", "urea_kuota": 147, "urea_sisa": 147, "npk_kuota": 135, "npk_sisa": 135}, {"no": 34, "nama": "H. PUDIN", "urea_kuota": 485, "urea_sisa": 485, "npk_kuota": 450, "npk_sisa": 450}, {"no": 35, "nama": "HUDRI", "urea_kuota": 495, "urea_sisa": 495, "npk_kuota": 450, "npk_sisa": 450}, {"no": 36, "nama": "IN", "urea_kuota": 825, "urea_sisa": 825, "npk_kuota": 750, "npk_sisa": 750}, {"no": 37, "nama": "IRA SRI RAHMAWATI", "urea_kuota": 330, "urea_sisa": 330, "npk_kuota": 300, "npk_sisa": 300}, {"no": 38, "nama": "IWIN", "urea_kuota": 66, "urea_sisa": 66, "npk_kuota": 60, "npk_sisa": 60}, {"no": 39, "nama": "JAJA", "urea_kuota": 825, "urea_sisa": 825, "npk_kuota": 750, "npk_sisa": 750}, {"no": 40, "nama": "JAELANI", "urea_kuota": 185, "urea_sisa": 185, "npk_kuota": 150, "npk_sisa": 150}, {"no": 41, "nama": "JEJE", "urea_kuota": 81, "urea_sisa": 81, "npk_kuota": 75, "npk_sisa": 75}, {"no": 42, "nama": "KAMAL", "urea_kuota": 618, "urea_sisa": 618, "npk_kuota": 561, "npk_sisa": 561}, {"no": 43, "nama": "KURNEN", "urea_kuota": 495, "urea_sisa": 495, "npk_kuota": 450, "npk_sisa": 450}, {"no": 44, "nama": "LILIN", "urea_kuota": 284, "urea_sisa": 284, "npk_kuota": 240, "npk_sisa": 240}, {"no": 45, "nama": "MAGUN", "urea_kuota": 450, "urea_sisa": 450, "npk_kuota": 300, "npk_sisa": 300}, {"no": 46, "nama": "MANSUR", "urea_kuota": 330, "urea_sisa": 330, "npk_kuota": 300, "npk_sisa": 300}, {"no": 47, "nama": "M. DADIN", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 188, "npk_sisa": 188}, {"no": 48, "nama": "M. JEJEN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 49, "nama": "M. ODANG SARIPUDIN", "urea_kuota": 453, "urea_sisa": 453, "npk_kuota": 411, "npk_sisa": 411}, {"no": 50, "nama": "M. SUKARMA", "urea_kuota": 288, "urea_sisa": 288, "npk_kuota": 261, "npk_sisa": 261}, {"no": 51, "nama": "MUHAMAD NANDANG JAELANI", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 52, "nama": "MUMUH MUHTAR", "urea_kuota": 1650, "urea_sisa": 1650, "npk_kuota": 1500, "npk_sisa": 1500}, {"no": 53, "nama": "MUSLIHI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 54, "nama": "NENH", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 55, "nama": "OBIN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 56, "nama": "PAHRUDIN", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 57, "nama": "POPON SOPIAH", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 58, "nama": "PUDJI", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 186, "npk_sisa": 186}, {"no": 59, "nama": "RAHMAT BIN KOMAR", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 60, "nama": "RUAL", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 61, "nama": "SAERUDIN", "urea_kuota": 213, "urea_sisa": 213, "npk_kuota": 195, "npk_sisa": 195}, {"no": 62, "nama": "SAHRUDI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 63, "nama": "SHOLIHIN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 64, "nama": "SITI MAS ROHILAH", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 65, "nama": "SOMADI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 66, "nama": "SUARDI", "urea_kuota": 225, "urea_sisa": 225, "npk_kuota": 225, "npk_sisa": 225}, {"no": 67, "nama": "SUPARTA", "urea_kuota": 150, "urea_sisa": 150, "npk_kuota": 150, "npk_sisa": 150}, {"no": 68, "nama": "SUPENDI", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 186, "npk_sisa": 186}, {"no": 69, "nama": "SURYANI", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 70, "nama": "TATI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 71, "nama": "TARODIN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 72, "nama": "TINI ROSTINI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 73, "nama": "TUMBRAN SAYANG", "urea_kuota": 375, "urea_sisa": 375, "npk_kuota": 375, "npk_sisa": 375}, {"no": 74, "nama": "UDIN", "urea_kuota": 411, "urea_sisa": 411, "npk_kuota": 375, "npk_sisa": 375}, {"no": 75, "nama": "UDIN SAMSUDIN", "urea_kuota": 246, "urea_sisa": 246, "npk_kuota": 225, "npk_sisa": 225}, {"no": 76, "nama": "USEP", "urea_kuota": 171, "urea_sisa": 171, "npk_kuota": 171, "npk_sisa": 171}, {"no": 77, "nama": "USEP SAEFUL MALIK", "urea_kuota": 189, "urea_sisa": 189, "npk_kuota": 57, "npk_sisa": 57}, {"no": 78, "nama": "USUP", "urea_kuota": 330, "urea_sisa": 330, "npk_kuota": 300, "npk_sisa": 300}, {"no": 79, "nama": "UTANG", "urea_kuota": 281, "urea_sisa": 281, "npk_kuota": 281, "npk_sisa": 281}, {"no": 80, "nama": "UUS", "urea_kuota": 600, "urea_sisa": 600, "npk_kuota": 200, "npk_sisa": 200}, {"no": 81, "nama": "UJN", "urea_kuota": 660, "urea_sisa": 660, "npk_kuota": 600, "npk_sisa": 600}, {"no": 82, "nama": "UUS SUHERMAN", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 83, "nama": "YADI", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 84, "nama": "YAYAN", "urea_kuota": 225, "urea_sisa": 225, "npk_kuota": 150, "npk_sisa": 150}, {"no": 85, "nama": "YAYA MULYADI SANJAYA", "urea_kuota": 165, "urea_sisa": 165, "npk_kuota": 150, "npk_sisa": 150}, {"no": 86, "nama": "YOSEP PRARAKA GUNAWAN", "urea_kuota": 204, "urea_sisa": 204, "npk_kuota": 186, "npk_sisa": 186}];
+var filterMode = 'all';
+var adminLoggedIn = false;
+var selectedIdx = -1;
+var PASS = 'sadar2026';
+
+// Load dari localStorage
+function loadData(){
+  var saved = localStorage.getItem('rdkkSadar2026');
+  if(saved){
+    try{ return JSON.parse(saved); }catch(e){}
+  }
+  return JSON.parse(JSON.stringify(RDKK_AWAL));
+}
+
+function saveData(data){
+  localStorage.setItem('rdkkSadar2026', JSON.stringify(data));
+}
+
+function loadRiwayat(){
+  var saved = localStorage.getItem('rdkkRiwayat');
+  if(saved){ try{ return JSON.parse(saved); }catch(e){} }
+  return [];
+}
+
+function saveRiwayat(r){ localStorage.setItem('rdkkRiwayat', JSON.stringify(r)); }
+
+var data = loadData();
+var riwayat = loadRiwayat();
+
+function updateHeader(){
+  var totalUrea = 0, totalNPK = 0, sudah = 0;
+  data.forEach(function(a){
+    totalUrea += a.urea_sisa;
+    totalNPK += a.npk_sisa;
+    if(a.urea_sisa < a.urea_kuota || a.npk_sisa < a.npk_kuota) sudah++;
+  });
+  document.getElementById('sisaUrea').textContent = totalUrea.toLocaleString('id-ID');
+  document.getElementById('sisaNPK').textContent = totalNPK.toLocaleString('id-ID');
+  document.getElementById('sudahAmbil').textContent = sudah;
+}
+
+function renderTabel(){
+  var q = document.getElementById('searchInput').value.toLowerCase();
+  var tbody = document.getElementById('tabelBody');
+  var filtered = data.filter(function(a){
+    var matchQ = a.nama.toLowerCase().includes(q);
+    if(filterMode === 'sisa') return matchQ && (a.urea_sisa > 0 || a.npk_sisa > 0);
+    if(filterMode === 'habis') return matchQ && a.urea_sisa === 0 && a.npk_sisa === 0;
+    return matchQ;
+  });
+
+  if(!filtered.length){
+    tbody.innerHTML = '<tr><td colspan="7" class="empty-row">Tidak ada data yang cocok</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(function(a){
+    var uPct = a.urea_kuota > 0 ? Math.round(a.urea_sisa/a.urea_kuota*100) : 0;
+    var nPct = a.npk_kuota > 0 ? Math.round(a.npk_sisa/a.npk_kuota*100) : 0;
+    var uClass = uPct > 50 ? 'sisa-ok' : uPct > 0 ? 'sisa-warn' : 'sisa-empty';
+    var nClass = nPct > 50 ? 'sisa-ok' : nPct > 0 ? 'sisa-warn' : 'sisa-empty';
+    var canAmbil = adminLoggedIn && (a.urea_sisa > 0 || a.npk_sisa > 0);
+    return '<tr>' +
+      '<td class="no-col">' + a.no + '</td>' +
+      '<td class="nama-col">' + a.nama + '</td>' +
+      '<td class="kuota-col">' + a.urea_kuota + ' kg</td>' +
+      '<td class="sisa-col"><div class="' + uClass + '">' + a.urea_sisa + ' kg</div>' +
+        '<div class="pct-bar"><div class="pct-fill" style="width:' + uPct + '%;background:' + (uPct > 50 ? 'var(--green)' : uPct > 0 ? 'var(--gold3)' : 'var(--red)') + '"></div></div></td>' +
+      '<td class="kuota-col">' + a.npk_kuota + ' kg</td>' +
+      '<td class="sisa-col"><div class="' + nClass + '">' + a.npk_sisa + ' kg</div>' +
+        '<div class="pct-bar"><div class="pct-fill" style="width:' + nPct + '%;background:' + (nPct > 50 ? 'var(--green)' : nPct > 0 ? 'var(--gold3)' : 'var(--red)') + '"></div></div></td>' +
+      '<td><button class="ambil-btn" onclick="bukaModal(' + a.no + ')" ' + (canAmbil ? '' : 'disabled') + '>' + (adminLoggedIn ? 'Catat Ambil' : 'Login Admin') + '</button></td>' +
+    '</tr>';
+  }).join('');
+}
+
+function filterTabel(){ renderTabel(); }
+function setFilter(mode, btn){
+  filterMode = mode;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderTabel();
+}
+
+function bukaModal(no){
+  if(!adminLoggedIn){ alert('Login admin dulu!'); return; }
+  var a = data.find(function(x){ return x.no === no; });
+  if(!a) return;
+  selectedIdx = no;
+  document.getElementById('mNama').textContent = a.nama;
+  document.getElementById('mInfo').textContent = 'Sisa Urea: ' + a.urea_sisa + ' kg | Sisa NPK: ' + a.npk_sisa + ' kg';
+  document.getElementById('mUrea').value = '';
+  document.getElementById('mNPK').value = '';
+  document.getElementById('mUrea').max = a.urea_sisa;
+  document.getElementById('mNPK').max = a.npk_sisa;
+  document.getElementById('mSisaUrea').textContent = 'Maks: ' + a.urea_sisa + ' kg';
+  document.getElementById('mSisaNPK').textContent = 'Maks: ' + a.npk_sisa + ' kg';
+  document.getElementById('modalAmbil').classList.add('show');
+}
+
+function tutupModal(){ document.getElementById('modalAmbil').classList.remove('show'); selectedIdx = -1; }
+
+function konfirmasiAmbil(){
+  var a = data.find(function(x){ return x.no === selectedIdx; });
+  if(!a) return;
+  var ambilUrea = parseInt(document.getElementById('mUrea').value) || 0;
+  var ambilNPK = parseInt(document.getElementById('mNPK').value) || 0;
+  if(ambilUrea === 0 && ambilNPK === 0){ alert('Masukkan jumlah yang diambil!'); return; }
+  if(ambilUrea > a.urea_sisa){ alert('Melebihi sisa kuota Urea!'); return; }
+  if(ambilNPK > a.npk_sisa){ alert('Melebihi sisa kuota NPK!'); return; }
+
+  a.urea_sisa -= ambilUrea;
+  a.npk_sisa -= ambilNPK;
+  saveData(data);
+
+  var now = new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  riwayat.unshift({nama:a.nama,urea:ambilUrea,npk:ambilNPK,tgl:now});
+  if(riwayat.length > 50) riwayat = riwayat.slice(0,50);
+  saveRiwayat(riwayat);
+
+  tutupModal();
+  renderTabel();
+  updateHeader();
+  renderRiwayat();
+  alert('Berhasil dicatat! Sisa Urea: ' + a.urea_sisa + ' kg | Sisa NPK: ' + a.npk_sisa + ' kg');
+}
+
+function renderRiwayat(){
+  if(!riwayat.length){
+    document.getElementById('riwayatWrap').style.display = 'none';
+    return;
+  }
+  document.getElementById('riwayatWrap').style.display = 'block';
+  document.getElementById('riwayatList').innerHTML = riwayat.slice(0,10).map(function(r){
+    return '<div class="riwayat-item">' +
+      '<div><div class="riwayat-nama">' + r.nama + '</div>' +
+      '<div class="riwayat-detail">' + r.tgl + ' · Urea: ' + r.urea + 'kg · NPK: ' + r.npk + 'kg</div></div>' +
+      '<div class="riwayat-jumlah">-' + (r.urea + r.npk) + 'kg</div></div>';
+  }).join('');
+}
+
+function toggleAdmin(){
+  var p = document.getElementById('adminPanel');
+  p.classList.toggle('show');
+}
+
+function loginAdmin(){
+  var pass = document.getElementById('adminPassInput').value;
+  if(pass === PASS){
+    adminLoggedIn = true;
+    document.getElementById('adminPassForm').style.display = 'none';
+    document.getElementById('adminLogged').classList.add('show');
+    renderTabel();
+  } else {
+    alert('Password salah!');
+  }
+}
+
+function resetSemua(){
+  if(!confirm('Reset semua kuota ke data awal RDKK 2026?')) return;
+  data = JSON.parse(JSON.stringify(RDKK_AWAL));
+  saveData(data);
+  renderTabel();
+  updateHeader();
+}
+
+function resetRiwayat(){
+  if(!confirm('Hapus semua riwayat pengambilan?')) return;
+  riwayat = [];
+  saveRiwayat(riwayat);
+  renderRiwayat();
+}
+
+// INIT
+updateHeader();
+renderTabel();
+renderRiwayat();
+</script>
+</body>
+</html>
